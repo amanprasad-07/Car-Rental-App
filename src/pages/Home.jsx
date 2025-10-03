@@ -16,7 +16,7 @@ function Home() {
 
             <div
                 className="relative px-5 sm:px-10 flex flex-col md:flex-row items-center justify-between h-[90vh] bg-cover bg-center bg-no-repeat shadow-2xl pt-30"
-                style={{ backgroundImage: "url('../src/assets/hero-bg-1.png')" }}
+                style={{ backgroundImage: "url('/hero-bg-1.png')" }}
             >
                 {/* Dark overlay */}
                 <div className="absolute inset-0 bg-black opacity-50 z-0"></div>

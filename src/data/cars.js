@@ -2,7 +2,7 @@
 const cars = [
   {
     id: 1,
-    image: "../src/assets/benz.jpeg",
+    image: "/benz.jpeg",
     company: "Mercedes-Benz",
     name: "S-Class",
     type: "Sedan",
@@ -12,7 +12,7 @@ const cars = [
   },
   {
     id: 2,
-    image: "../src/assets/bmw7s.jpg",
+    image: "/bmw7s.jpg",
     company: "BMW",
     name: "7 Series",
     type: "Sedan",
@@ -22,7 +22,7 @@ const cars = [
   },
   {
     id: 3,
-    image: "../src/assets/a8l.jpg",
+    image: "/a8l.jpg",
     company: "Audi",
     name: "A8 L",
     type: "Sedan",
@@ -32,7 +32,7 @@ const cars = [
   },
   {
     id: 4,
-    image: "../src/assets/XJL.jpg",
+    image: "/XJL.jpg",
     company: "Jaguar",
     name: "XJL",
     type: "Sedan",
@@ -42,7 +42,7 @@ const cars = [
   },
   {
     id: 5,
-    image: "../src/assets/phantom.jpg",
+    image: "/phantom.jpg",
     company: "Rolls-Royce",
     name: "Phantom",
     type: "Limousine",
@@ -52,7 +52,7 @@ const cars = [
   },
   {
     id: 6,
-    image: "../src/assets/Mulsanne.jpg",
+    image: "/Mulsanne.jpg",
     company: "Bentley",
     name: "Mulsanne",
     type: "Limousine",
@@ -62,7 +62,7 @@ const cars = [
   },
   {
     id: 7,
-    image: "../src/assets/lambo-evo.jpg",
+    image: "/lambo-evo.jpg",
     company: "Lamborghini",
     name: "Huracán EVO",
     type: "Coupe",
@@ -72,7 +72,7 @@ const cars = [
   },
   {
     id: 8,
-    image: "../src/assets/urus.jpg",
+    image: "/urus.jpg",
     company: "Lamborghini",
     name: "Urus",
     type: "SUV",
@@ -82,7 +82,7 @@ const cars = [
   },
   {
     id: 9,
-    image: "../src/assets/ferrari-roma.jpg",
+    image: "/ferrari-roma.jpg",
     company: "Ferrari",
     name: "Roma",
     type: "Coupe",
@@ -92,7 +92,7 @@ const cars = [
   },
   {
     id: 10,
-    image: "../src/assets/ferrari-488.jpg",
+    image: "/ferrari-488.jpg",
     company: "Ferrari",
     name: "488 Spider",
     type: "Coupe",
@@ -102,7 +102,7 @@ const cars = [
   },
   {
     id: 11,
-    image: "../src/assets/911.jpg",
+    image: "/911.jpg",
     company: "Porsche",
     name: "911 Carrera",
     type: "Coupe",
@@ -112,7 +112,7 @@ const cars = [
   },
   {
     id: 12,
-    image: "../src/assets/cayenne.jpg",
+    image: "/cayenne.jpg",
     company: "Porsche",
     name: "Cayenne",
     type: "SUV",
@@ -122,7 +122,7 @@ const cars = [
   },
   {
     id: 13,
-    image: "../src/assets/levante.jpg",
+    image: "/levante.jpg",
     company: "Maserati",
     name: "Levante",
     type: "SUV",
@@ -132,7 +132,7 @@ const cars = [
   },
   {
     id: 14,
-    image: "../src/assets/granturismo.jpg",
+    image: "/granturismo.jpg",
     company: "Maserati",
     name: "GranTurismo",
     type: "Coupe",
@@ -142,7 +142,7 @@ const cars = [
   },
   {
     id: 15,
-    image: "../src/assets/aston-DB11.jpg",
+    image: "/aston-DB11.jpg",
     company: "Aston Martin",
     name: "DB11",
     type: "Coupe",
@@ -152,7 +152,7 @@ const cars = [
   },
   {
     id: 16,
-    image: "../src/assets/vantage.jpg",
+    image: "/vantage.jpg",
     company: "Aston Martin",
     name: "Vantage",
     type: "Coupe",
@@ -162,7 +162,7 @@ const cars = [
   },
   {
     id: 17,
-    image: "../src/assets/tesla.jpg",
+    image: "/tesla.jpg",
     company: "Tesla",
     name: "Model S Plaid",
     type: "Sedan",
@@ -172,7 +172,7 @@ const cars = [
   },
   {
     id: 18,
-    image: "../src/assets/range-rover.jpg",
+    image: "/range-rover.jpg",
     company: "Range Rover",
     name: "Autobiography",
     type: "SUV",
@@ -182,7 +182,7 @@ const cars = [
   },
   {
     id: 19,
-    image: "../src/assets/720s.jpg",
+    image: "/720s.jpg",
     company: "McLaren",
     name: "720S",
     type: "Coupe",
@@ -192,7 +192,7 @@ const cars = [
   },
   {
     id: 20,
-    image: "../src/assets/Bugatti-Chiron.jpg",
+    image: "/Bugatti-Chiron.jpg",
     company: "Bugatti",
     name: "Chiron (Special Listing)",
     type: "Coupe",
