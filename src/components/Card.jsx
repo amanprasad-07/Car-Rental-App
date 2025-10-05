@@ -1,31 +1,52 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setSelectedCar } from "../features/bookingSlice";
 
 function Card({ car }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // Handler for "Book Now" button
+  const handleBookNow = () => {
+    // Save selected car in Redux
+    dispatch(setSelectedCar(car));
+
+    // Navigate to booking confirmation page
+    navigate("/booking-confirmation");
+  };
+
   return (
-    <div
-      key={car.id}
-      className="flex flex-col items-center bg-[#e5e5e5] w-90 rounded-lg overflow-hidden shadow-lg"
-    >
-      <div className="flex-none h-70">
+    <div className="flex flex-col items-center bg-[#e5e5e5] w-72 rounded-lg overflow-hidden shadow-lg">
+      {/* Car Image */}
+      <div className="w-full h-48">
         <img
           src={car.image}
           alt={`${car.company} ${car.name}`}
-          className="object-cover h-70"
+          className="object-cover w-full h-full"
         />
       </div>
-      <div className="p-5 text-center flex-1 h-30">
-        <h1 className="font-bold text-lg text-[#14213d]">
+
+      {/* Car Details */}
+      <div className="flex flex-col items-center p-4 text-center">
+        {/* Car Name */}
+        <h2 className="font-bold text-lg text-[#14213d]">
           {car.company} {car.name}
-        </h1>
-        <h2 className="text-[#8e0e70] font-bold">Price: {car.price}</h2>
-        <div className="flex gap-2 font-semibold">
-          <p>{car.type}</p>
-          <span>|</span>
-          <p>{car.fuel}</p>
-          <span>|</span>
-          <p>{car.seats}</p>
-        </div>
-        <button className="bg-[#fca311] px-6 py-2 font-medium rounded-lg text-black mr-5 hover:bg-[#d48403] transition cursor-pointer mt-3">
+        </h2>
+
+        {/* Price */}
+        <p className="text-[#8e0e70] font-semibold mt-1">Price: {car.price}</p>
+
+        {/* Car Info: Type | Fuel | Seats */}
+        <p className="flex gap-2 justify-center font-medium text-gray-700 mt-1">
+          <span>{car.type}</span>|<span>{car.fuel}</span>|<span>{car.seats} seats</span>
+        </p>
+
+        {/* Book Now Button */}
+        <button
+          onClick={handleBookNow}
+          className="bg-[#fca311] px-6 py-2 font-medium rounded-lg text-black hover:bg-[#d48403] transition mt-4"
+        >
           Book Now
         </button>
       </div>

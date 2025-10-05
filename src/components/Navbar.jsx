@@ -1,53 +1,82 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
+/**
+ * Navbar Component
+ * Responsive navigation bar that hides on scroll down and shows on scroll up.
+ */
 function Navbar() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);       // Sidebar menu open state for mobile
+    const [show, setShow] = useState(true);           // Navbar visibility state
+    const [lastScrollY, setLastScrollY] = useState(0); // Track last scroll position
 
-    const linkClass = ({ isActive }) =>
-        `px-4 py-2 rounded hover:bg-blue-50 ${isActive ? "bg-white" : ""}`;
+    // Handle navbar hide/show on scroll
+    useEffect(() => {
+        const handleScroll = () => {
+            setShow(window.scrollY < lastScrollY || window.scrollY < 50);
+            setLastScrollY(window.scrollY);
+        };
 
-    const randomUserId = Math.floor(Math.random() * 10) + 1;
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll); 
+    }, [lastScrollY]);
 
     return (
-        <nav className="fixed top-0 left-0 w-full z-[9999] bg-neutral-950 opacity-95 flex justify-between items-center px-5 py-5">
-            <div className='justify-center items-center'>
-                <h1 className="text-2xl font-bold text-gray-50 tracking-wide hover:text-gray-500 transition-colors duration-300">
+        <nav
+            className={`
+        fixed top-0 left-0 w-full z-50 bg-neutral-950 flex justify-between items-center 
+        px-5 py-5 shadow-md transition-transform duration-300
+        ${show ? "translate-y-0" : "-translate-y-full"}
+      `}
+        >
+            {/* Branding */}
+            <div className="flex items-center">
+                <h1 className="text-2xl font-bold text-gray-50 tracking-wide hover:text-gray-400 transition-colors duration-300">
                     LuxeRides
                 </h1>
             </div>
 
-            <ul className='hidden lg:flex flex-row gap-12 justify-center items-center text-lg'>
-                <li><Link to="/" className="text-white">Home</Link></li>
-                <li><Link to="/Browse" className="text-white">Browse</Link></li>
-                <li><Link to={`/user/${randomUserId}`} className="text-white">User</Link></li>
+            {/* Desktop Menu */}
+            <ul className="hidden lg:flex gap-12 text-lg items-center px-10">
+                <li><Link to="/" className="text-white hover:text-gray-300">Home</Link></li>
+                <li><Link to="/browse" className="text-white hover:text-gray-300">Browse</Link></li>
+                <li><Link to="/my-bookings" className="text-white hover:text-gray-300">My Bookings</Link></li>
             </ul>
 
-            <div className='relative'>
-                <button
-                    className='cursor-pointer lg:hidden'
-                    onClick={() => setIsOpen(prev => !prev)}
-                >
-                    <div>
-                        <span className='block bg-gray-200 w-9 h-1 rounded-2xl'></span>
-                        <span className='block bg-gray-200 w-9 h-1 rounded-2xl my-1'></span>
-                        <span className='block bg-gray-200 w-9 h-1 rounded-2xl'></span>
+            {/* Mobile Hamburger Menu */}
+            <div className="relative lg:hidden">
+                <button onClick={() => setIsOpen(prev => !prev)} className="cursor-pointer">
+                    <div className="space-y-1">
+                        <span className="block w-8 h-1 bg-gray-200 rounded"></span>
+                        <span className="block w-8 h-1 bg-gray-200 rounded"></span>
+                        <span className="block w-8 h-1 bg-gray-200 rounded"></span>
                     </div>
                 </button>
-                {isOpen && (
-                    <div className='fixed inset-0 z-[9999] flex justify-end'>
-                        {/* Semi-transparent overlay behind the menu */}
-                        <div
-                            className='absolute inset-0 bg-black/50'
-                            onClick={() => setIsOpen(false)}
-                        ></div>
 
-                        {/* Sidebar menu */}
-                        <div className='fixed right-0 top-0 h-full bg-blue-200 w-80 p-7 shadow-lg z-[10000] lg:hidden'>
-                            <ul className='flex flex-col gap-4'>
-                                <li><Link to="/" className="" onClick={() => setIsOpen(false)}>Home</Link></li>
-                                <li><Link to="/Browse" className="" onClick={() => setIsOpen(false)}>Browse</Link></li>
-                                <li><Link to={`/user/${randomUserId}`} className="" onClick={() => setIsOpen(false)}>User</Link></li>
+                {/* Mobile Sidebar Menu */}
+                {isOpen && (
+                    <div className="fixed inset-0 z-50 flex justify-end">
+                        {/* Semi-transparent overlay */}
+                        <div className="absolute inset-0 bg-black/50" onClick={() => setIsOpen(false)}></div>
+
+                        {/* Sidebar links */}
+                        <div className="fixed right-0 top-18 h-screen w-full bg-neutral-800  p-6 shadow-lg">
+                            <ul className="flex flex-col gap-4 text-xl font-semibold">
+                                <li>
+                                    <Link to="/" className="block w-full text-center py-2 rounded hover:bg-neutral-600" onClick={() => setIsOpen(false)}>
+                                        Home
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/browse" className="block w-full text-center py-2 rounded hover:bg-neutral-600" onClick={() => setIsOpen(false)}>
+                                        Browse
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/my-bookings" className="block w-full text-center py-2 rounded hover:bg-neutral-600" onClick={() => setIsOpen(false)}>
+                                        My Bookings
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -58,3 +87,5 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
