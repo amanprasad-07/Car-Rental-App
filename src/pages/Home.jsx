@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import ProductList from "../components/ProductList";
 import cars from "../data/cars";
 import { setSelectedCar } from "../features/bookingSlice";
-import BookingForm from "../components/BookingForm";
+import BookingForm from "./BookingForm";
 
 function Home() {
   
@@ -50,8 +50,8 @@ function Home() {
             {/* Action Buttons */}
             <div className="flex flex-col md:flex-row gap-4 mb-6 justify-center md:justify-start">
               <a href="#bookNow">
-                <button className="bg-gray-100 px-6 py-2 font-medium rounded-lg text-black hover:bg-[#14213d] hover:text-white transition">
-                  Book Now
+                <button className="bg-[#fca311] px-6 py-2 font-medium rounded-lg text-black hover:bg-[#d48403] hover:text-black transition">
+                  Top Picks
                 </button>
               </a>
               <Link to="/browse">

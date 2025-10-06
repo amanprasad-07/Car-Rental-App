@@ -23,7 +23,7 @@ import Browse from "./pages/Browse.jsx";
 import MyBookings from "./pages/MyBookings.jsx";
 import BookingConfirmation from "./pages/BookingConfirmation.jsx";
 import PaymentPage from "./pages/PaymentPage.jsx";
-import BookingForm from "./components/BookingForm.jsx";
+import BookingForm from "./pages/BookingForm.jsx";
 
 // Define application routes
 const router = createBrowserRouter([
