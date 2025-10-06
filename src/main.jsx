@@ -23,6 +23,7 @@ import Browse from "./pages/Browse.jsx";
 import MyBookings from "./pages/MyBookings.jsx";
 import BookingConfirmation from "./pages/BookingConfirmation.jsx";
 import PaymentPage from "./pages/PaymentPage.jsx";
+import BookingForm from "./components/BookingForm.jsx";
 
 // Define application routes
 const router = createBrowserRouter([
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       { path: "/booking-confirmation", element: <BookingConfirmation /> },
       { path: "/my-bookings", element: <MyBookings /> },
       { path: "/payment/:bookingId", element: <PaymentPage /> },
+      { path: "/booking-form", element: <BookingForm /> },
     ],
   },
 ]);

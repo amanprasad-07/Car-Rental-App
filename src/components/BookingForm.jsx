@@ -33,13 +33,14 @@ function BookingForm() {
     );
 
     // Navigate to browse page
-    navigate("/browse");
+    navigate("/booking-confirmation");
   };
 
   return (
-    <form
+   <div className="flex justify-center pt-30 bg-neutral-800 px-10">
+     <form
       onSubmit={handleSubmit}
-      className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 shadow-lg text-neutral-300 w-full md:w-[350px] mt-10 md:mt-0 mb-10"
+      className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 shadow-lg text-neutral-300 w-full lg:w-4xl mt-10 mb-20 pt-10"
     >
       <h2 className="bg-gray-100 text-lg px-5 py-2 mb-5 font-semibold text-black rounded-lg">
         Let's find your perfect car
@@ -152,6 +153,7 @@ function BookingForm() {
         </button>
       </div>
     </form>
+   </div>
   );
 }
 

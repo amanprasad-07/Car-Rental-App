@@ -63,7 +63,7 @@ function Home() {
           </div>
 
           {/* ---------- RIGHT SIDE: Booking Form ---------- */}
-          <BookingForm/>
+          {/* <BookingForm/> */}
           
         </div>
       </section>

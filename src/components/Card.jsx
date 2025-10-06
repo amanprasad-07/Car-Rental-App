@@ -13,7 +13,7 @@ function Card({ car }) {
     dispatch(setSelectedCar(car));
 
     // Navigate to booking confirmation page
-    navigate("/booking-confirmation");
+    navigate("/booking-form");
   };
 
   return (
