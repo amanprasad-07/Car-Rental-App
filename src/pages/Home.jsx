@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import ProductList from "../components/ProductList";
 import cars from "../data/cars";
 import { setSelectedCar } from "../features/bookingSlice";
+import BookingForm from "../components/BookingForm";
 
 function Home() {
-  // ✅ State for toggles
-  const [sameLocation, setSameLocation] = useState(true); // Pickup & drop-off same place toggle
-  const [hide, setHide] = useState(true); // Show/hide location dropdown
+  
 
   // ✅ Redux & Navigation setup
   const dispatch = useDispatch();
@@ -61,119 +60,11 @@ function Home() {
                 </button>
               </Link>
             </div>
-
-            {/* Search Bar (non-functional for now) */}
-            <form
-              className="flex items-center rounded-lg h-11 w-full sm:w-[400px] text-lg pl-3 bg-white mx-auto md:mx-0 shadow-md"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="text"
-                placeholder="Search Your Dream Car..."
-                className="flex-1 focus:outline-none text-neutral-800 placeholder-gray-500"
-              />
-              <button
-                type="submit"
-                className="px-4 bg-[#fca311] font-medium border-none h-full rounded-md rounded-l-none hover:bg-[#d48403] transition text-black"
-              >
-                Search
-              </button>
-            </form>
           </div>
 
           {/* ---------- RIGHT SIDE: Booking Form ---------- */}
-          <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 shadow-lg text-neutral-300 w-full md:w-[350px] mt-10 md:mt-0 mb-10">
-            <h2 className="bg-gray-100 text-lg px-5 py-2 mb-5 font-semibold text-black rounded-lg">
-              Let's find your perfect car
-            </h2>
-
-            {/* Drop-off same location toggle */}
-            <div className="flex items-center gap-3 mb-4 ml-4">
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="sr-only peer"
-                  checked={sameLocation}
-                  onChange={() => setSameLocation(!sameLocation)}
-                />
-                <div className="w-11 h-6 bg-gray-300 rounded-full peer-checked:bg-[#243a68] transition-colors"></div>
-                <div className="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full peer-checked:translate-x-5 transition-transform"></div>
-                <span className="text-sm font-medium ml-2 text-white">
-                  Drop Off at same location
-                </span>
-              </label>
-            </div>
-
-            {/* ----------- Pick-up Location ----------- */}
-            <div className="relative w-full mb-5 px-5">
-              <input
-                type="text"
-                placeholder="Enter pick-up location..."
-                className="border rounded-xl p-2 w-full focus:outline-none"
-                onClick={() => setHide(!hide)}
-              />
-
-              {/* Dropdown (visible on click) */}
-              {!hide && (
-                <ul className="absolute top-12 left-0 w-full border rounded-xl bg-gray-100 shadow-lg z-10 text-[#243a68]">
-                  {["Kochi", "Trivandrum", "Bangalore"].map((city) => (
-                    <li
-                      key={city}
-                      className="p-2 hover:bg-gray-300 cursor-pointer"
-                    >
-                      {city}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-
-            {/* ----------- Drop-off Location (if not same) ----------- */}
-            {!sameLocation && (
-              <div className="relative w-full mb-5 px-5">
-                <input
-                  type="text"
-                  placeholder="Enter drop-off location..."
-                  className="border rounded-xl p-2 w-full focus:outline-none"
-                />
-              </div>
-            )}
-
-            {/* ----------- Date & Time Fields ----------- */}
-            <div className="w-full px-5 space-y-4">
-              <div>
-                <label className="block mb-1 text-sm font-medium text-white">
-                  Pick-up Date & Time
-                </label>
-                <input
-                  type="datetime-local"
-                  className="border rounded-xl p-2 w-full focus:outline-none"
-                  min={new Date().toISOString().slice(0, 16)}
-                />
-              </div>
-
-              <div>
-                <label className="block mb-1 text-sm font-medium text-white">
-                  Drop-off Date & Time
-                </label>
-                <input
-                  type="datetime-local"
-                  className="border rounded-xl p-2 w-full focus:outline-none"
-                  min={new Date().toISOString().slice(0, 16)}
-                />
-              </div>
-            </div>
-
-            {/* ----------- Submit Button ----------- */}
-            <div className="flex justify-center mt-5">
-              <button
-                type="submit"
-                className="bg-[#fca311] px-6 py-2 font-medium rounded-lg text-black hover:bg-[#d48403] transition"
-              >
-                Submit
-              </button>
-            </div>
-          </div>
+          <BookingForm/>
+          
         </div>
       </section>
 

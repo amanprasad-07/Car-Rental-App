@@ -7,24 +7,29 @@ export default function BookingConfirmation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Get the currently selected car from Redux state
-  const selectedCar = useSelector((state) => state.booking.selectedCar);
+  // Grab all booking data from Redux
+  const {
+    selectedCar,
+    pickupBranch,
+    dropoffBranch,
+    pickupDate,
+    dropoffDate,
+    sameLocation,
+  } = useSelector((state) => state.booking);
 
-  /**
-   * Handles the booking confirmation:
-   * - Creates a new booking object
-   * - Adds it to the Redux store (and localStorage)
-   * - Clears the selected car
-   * - Redirects user to "My Bookings" page
-   */
   const handleConfirmBooking = () => {
     if (!selectedCar) return;
 
     const newBooking = {
-      id: Date.now(), // Unique ID based on timestamp
+      id: Date.now(),
       carId: selectedCar.id,
       carName: `${selectedCar.company} ${selectedCar.name}`,
       price: selectedCar.price,
+      pickupBranch,
+      dropoffBranch,
+      pickupDate,
+      dropoffDate,
+      sameLocation,
       createdAt: new Date().toISOString(),
     };
 
@@ -44,24 +49,30 @@ export default function BookingConfirmation() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-neutral-900 text-white p-6">
-      {/* Booking confirmation card */}
       <div className="bg-neutral-800 p-8 rounded-lg shadow-lg text-center max-w-md w-full">
         <h1 className="text-2xl font-bold mb-4 text-[#fca311]">
           Booking Confirmation
         </h1>
 
-        {/* Booking Details */}
-        <p className="mb-2 text-lg">
-          Car: <b>{selectedCar.company} {selectedCar.name}</b>
-        </p>
-        <p className="mb-2 text-lg">
-          Price: ₹{selectedCar.price}
-        </p>
-        <p className="text-sm text-gray-300 mb-6">
-          Booking Time: {new Date().toLocaleString()}
-        </p>
+        {/* Car Details */}
+        <div className="mb-4 text-left">
+          <h2 className="text-lg font-semibold mb-2">Car Details</h2>
+          <p>Model: <b>{selectedCar.company} {selectedCar.name}</b></p>
+          <p>Fuel: {selectedCar.fuel}</p>
+          <p>Seats: {selectedCar.seats}</p>
+          <p>Price: ₹{selectedCar.price}</p>
+        </div>
 
-        {/* Action Buttons */}
+        {/* Booking Details */}
+        <div className="mb-6 text-left">
+          <h2 className="text-lg font-semibold mb-2">Booking Info</h2>
+          <p>Pick-up Branch: {pickupBranch}</p>
+          <p>Drop-off Branch: {dropoffBranch}</p>
+          <p>Pick-up Date: {pickupDate}</p>
+          <p>Drop-off Date: {dropoffDate}</p>
+        </div>
+
+        {/* Buttons */}
         <div className="flex justify-center gap-4">
           <button
             onClick={handleConfirmBooking}

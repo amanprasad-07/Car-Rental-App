@@ -32,7 +32,7 @@ function Navbar() {
             {/* Branding */}
             <div className="flex items-center">
                 <h1 className="text-2xl font-bold text-gray-50 tracking-wide hover:text-gray-400 transition-colors duration-300">
-                    LuxeRides
+                     <Link to="/">LuxeRides</Link>
                 </h1>
             </div>
 

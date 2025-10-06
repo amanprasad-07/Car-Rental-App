@@ -1,32 +1,27 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { removeBooking } from '../features/bookingSlice';
 
 /**
  * ✅ MyBookings Page
- * Displays all confirmed bookings.
- * Users can view details, proceed to payment, or cancel a booking.
+ * Displays all confirmed bookings with full details.
+ * Users can view info, proceed to payment, or cancel a booking.
  */
 export default function MyBookings() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // ✅ Access all saved bookings from Redux store
+  // Get all saved bookings from Redux store
   const bookings = useSelector((state) => state.booking.bookings);
 
-  /**
-   * 🗑️ Cancel a booking
-   * Removes the booking from Redux state after user confirmation.
-   */
+  // 🗑️ Cancel a booking
   const handleCancel = (id) => {
     if (!window.confirm("Are you sure you want to cancel this booking?")) return;
-    dispatch({ type: 'booking/removeBooking', payload: id });
+    dispatch(removeBooking(id));
   };
 
-  /**
-   * 💳 Proceed to Payment
-   * Navigates user to payment page with booking ID.
-   */
+  // 💳 Proceed to Payment
   const handleRentNow = (booking) => {
     navigate(`/payment/${booking.id}`);
   };
@@ -34,7 +29,6 @@ export default function MyBookings() {
   return (
     <div className="min-h-screen bg-neutral-900 text-white p-6 pt-30">
       <div className="max-w-4xl mx-auto">
-        {/* 🏷️ Page Title */}
         <h1 className="text-3xl font-bold mb-6 text-center md:text-left">
           My Bookings
         </h1>
@@ -43,7 +37,6 @@ export default function MyBookings() {
         {bookings.length === 0 ? (
           <p className="text-gray-400 text-center">No bookings yet.</p>
         ) : (
-          // 🧾 List of bookings
           <div className="space-y-4">
             {bookings.map((b) => (
               <div
@@ -51,13 +44,25 @@ export default function MyBookings() {
                 className="p-5 bg-neutral-800 rounded-lg shadow-md flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition hover:bg-neutral-700"
               >
                 {/* 🚗 Booking Details */}
-                <div>
-                  <p className="font-semibold text-[#fca311] text-lg">{b.carName}</p>
+                <div className="text-left">
+                  <p className="font-semibold text-[#fca311] text-lg">
+                    {b.carName}
+                  </p>
                   <p className="text-sm text-gray-300">Ref: {b.id}</p>
                   <p className="text-sm text-gray-400">
                     Booked on: {new Date(b.createdAt).toLocaleString()}
                   </p>
-                  <p className="text-sm text-gray-300">Price: ₹{b.price}</p>
+                  <p className="text-sm text-gray-300 mb-1">
+                    Price: ₹{b.price}
+                  </p>
+
+                  {/* 🏢 Branch Info */}
+                  <div className="mt-2 text-sm text-gray-300">
+                    <p>Pickup: {b.pickupBranch || '—'}</p>
+                    <p>Drop-off: {b.dropoffBranch || '—'}</p>
+                    <p>Pickup Date: {b.pickupDate || '—'}</p>
+                    <p>Drop-off Date: {b.dropoffDate || '—'}</p>
+                  </div>
                 </div>
 
                 {/* 🎯 Action Buttons */}
