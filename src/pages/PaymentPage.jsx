@@ -43,7 +43,7 @@ export default function PaymentPage() {
    */
   const handlePayment = () => {
     alert("✅ Payment successful! Thank you for booking with us.");
-    navigate("/");
+    navigate("/home");
   };
 
   return (

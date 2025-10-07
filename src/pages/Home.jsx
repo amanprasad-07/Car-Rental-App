@@ -5,6 +5,7 @@ import ProductList from "../components/ProductList";
 import cars from "../data/cars";
 import { setSelectedCar } from "../features/bookingSlice";
 import BookingForm from "./BookingForm";
+import LoginPage from "./LoginPage";
 
 function Home() {
   
@@ -62,14 +63,13 @@ function Home() {
             </div>
           </div>
 
-          {/* ---------- RIGHT SIDE: Booking Form ---------- */}
-          {/* <BookingForm/> */}
+
           
         </div>
       </section>
 
       {/* ====================== FEATURED CARS SECTION ====================== */}
-      <section id="bookNow" className="bg-neutral-800 text-center py-20">
+      <section id="bookNow" className="bg-neutral-900 text-center py-20">
         <h2 className="text-3xl font-bold text-white mb-3">
           Our Top Picks for You
         </h2>

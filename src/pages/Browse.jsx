@@ -78,7 +78,7 @@ function Browse() {
   };
 
   return (
-    <div className="flex flex-col items-center bg-neutral-800 pt-28 p-7 min-h-screen">
+    <div className="flex flex-col items-center bg-neutral-900 pt-28 p-7 min-h-screen">
       {/* Page Title */}
       <h1 className="text-white text-3xl font-bold pb-7 text-center">
         Find Your Dream Car

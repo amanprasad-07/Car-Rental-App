@@ -32,13 +32,13 @@ function Navbar() {
             {/* Branding */}
             <div className="flex items-center">
                 <h1 className="text-2xl font-bold text-gray-50 tracking-wide hover:text-gray-400 transition-colors duration-300">
-                     <Link to="/">LuxeRides</Link>
+                     <Link to="/home">LuxeRides</Link>
                 </h1>
             </div>
 
             {/* Desktop Menu */}
             <ul className="hidden lg:flex gap-12 text-lg items-center px-10">
-                <li><Link to="/" className="text-white hover:text-gray-300">Home</Link></li>
+                <li><Link to="/home" className="text-white hover:text-gray-300">Home</Link></li>
                 <li><Link to="/browse" className="text-white hover:text-gray-300">Browse</Link></li>
                 <li><Link to="/my-bookings" className="text-white hover:text-gray-300">My Bookings</Link></li>
             </ul>
@@ -63,7 +63,7 @@ function Navbar() {
                         <div className="fixed right-0 top-18 h-screen w-full bg-neutral-800  p-6 shadow-lg">
                             <ul className="flex flex-col gap-4 text-xl font-semibold">
                                 <li>
-                                    <Link to="/" className="block w-full text-center py-2 rounded hover:bg-neutral-600" onClick={() => setIsOpen(false)}>
+                                    <Link to="/home" className="block w-full text-center py-2 rounded hover:bg-neutral-600" onClick={() => setIsOpen(false)}>
                                         Home
                                     </Link>
                                 </li>
