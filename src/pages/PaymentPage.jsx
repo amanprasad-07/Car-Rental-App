@@ -19,7 +19,7 @@ export default function PaymentPage() {
     dispatch(clearPendingBooking());
 
     alert("✅ Payment successful! Booking confirmed.");
-    navigate("/my-bookings");
+    navigate("/myprofile");
   };
 
   // 🧾 No pending booking? Show fallback
@@ -45,7 +45,7 @@ export default function PaymentPage() {
       <div className="bg-neutral-800 p-8 rounded-lg shadow-lg text-center max-w-md w-full">
         <h1 className="text-2xl font-bold mb-4 text-[#fca311]">Payment Page</h1>
         <p>Car: {pendingBooking.carName}</p>
-        <p>Total Price: ₹{pendingBooking.price}</p>
+        <p>Total Price: {pendingBooking.price}</p>
 
         <button
           onClick={handlePaymentSuccess}

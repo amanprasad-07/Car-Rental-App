@@ -11,7 +11,7 @@ import store from "./store.js";
 // Pages
 import Home from "./pages/Home.jsx";
 import Browse from "./pages/Browse.jsx";
-import MyBookings from "./pages/MyBookings.jsx";
+import MyProfile from "./pages/MyProfile.jsx";
 import BookingConfirmation from "./pages/BookingConfirmation.jsx";
 import PaymentPage from "./pages/PaymentPage.jsx";
 import BookingForm from "./pages/BookingForm.jsx";
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
           { path: "/browse", element: <Browse /> },
           { path: "/booking-form", element: <BookingForm /> },
           { path: "/booking-confirmation", element: <BookingConfirmation /> },
-          { path: "/my-bookings", element: <MyBookings /> },
+          { path: "/myprofile", element: <MyProfile /> },
           { path: "/payment", element: <PaymentPage /> },
         ],
       },

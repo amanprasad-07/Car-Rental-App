@@ -40,7 +40,7 @@ function Navbar() {
             <ul className="hidden lg:flex gap-12 text-lg items-center px-10">
                 <li><Link to="/home" className="text-white hover:text-gray-300">Home</Link></li>
                 <li><Link to="/browse" className="text-white hover:text-gray-300">Browse</Link></li>
-                <li><Link to="/my-bookings" className="text-white hover:text-gray-300">My Bookings</Link></li>
+                <li><Link to="/myprofile" className="text-white hover:text-gray-300">My Profile</Link></li>
             </ul>
 
             {/* Mobile Hamburger Menu */}
@@ -73,8 +73,8 @@ function Navbar() {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/my-bookings" className="block w-full text-center py-2 rounded hover:bg-neutral-600" onClick={() => setIsOpen(false)}>
-                                        My Bookings
+                                    <Link to="/myprofile" className="block w-full text-center py-2 rounded hover:bg-neutral-600" onClick={() => setIsOpen(false)}>
+                                        My Profile
                                     </Link>
                                 </li>
                             </ul>
