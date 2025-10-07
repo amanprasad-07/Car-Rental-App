@@ -1,33 +1,35 @@
-// src/pages/PaymentPage.jsx
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addBooking, clearPendingBooking } from "../features/bookingSlice";
 
-/**
- * 💳 PaymentPage Component
- * Displays payment details for a specific booking.
- * Allows user to confirm and simulate a payment process.
- */
 export default function PaymentPage() {
-  const { bookingId } = useParams(); // Get booking ID from URL
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // ✅ Retrieve booking details from Redux store by ID
-  const booking = useSelector((state) =>
-    state.booking.bookings.find((b) => b.id === Number(bookingId))
-  );
+  // Get the pending booking (stored temporarily before payment)
+  const pendingBooking = useSelector((state) => state.booking.pendingBooking);
 
-  /**
-   * 🧾 If booking not found (invalid or missing ID)
-   * Show fallback message and navigation option.
-   */
-  if (!booking) {
+  // 💰 Handle successful payment
+  const handlePaymentSuccess = () => {
+    if (!pendingBooking) return;
+
+    // Move from pendingBooking → confirmed bookings
+    dispatch(addBooking(pendingBooking));
+    dispatch(clearPendingBooking());
+
+    alert("✅ Payment successful! Booking confirmed.");
+    navigate("/my-bookings");
+  };
+
+  // 🧾 No pending booking? Show fallback
+  if (!pendingBooking) {
     return (
-      <div className="min-h-screen bg-neutral-900 text-white flex items-center justify-center">
-        <div className="text-center bg-neutral-800 p-8 rounded-lg shadow-lg">
-          <p className="text-xl font-semibold mb-4">Booking not found.</p>
+      <div className="min-h-screen flex items-center justify-center bg-neutral-900 text-white">
+        <div className="text-center">
+          <p className="mb-4">No pending booking found. Please confirm a booking first.</p>
           <button
-            onClick={() => navigate("/mybookings")}
+            onClick={() => navigate("/cars")}
             className="bg-[#fca311] px-5 py-2 rounded-md text-black font-medium hover:bg-[#e68a00] transition"
           >
             Go Back
@@ -37,46 +39,19 @@ export default function PaymentPage() {
     );
   }
 
-  /**
-   * 💰 Handle payment confirmation (mock)
-   * For now, it just shows an alert — can be replaced with payment gateway integration.
-   */
-  const handlePayment = () => {
-    alert("✅ Payment successful! Thank you for booking with us.");
-    navigate("/home");
-  };
-
+  // 🎨 UI for valid payment process
   return (
-    <div className="min-h-screen bg-neutral-900 text-white flex flex-col items-center justify-center px-6 py-10">
-      <div className="bg-neutral-800 p-8 rounded-lg shadow-lg w-full max-w-md">
-        {/* 🏷️ Page Title */}
-        <h1 className="text-2xl font-bold mb-5 text-[#fca311] text-center">
-          Payment Summary
-        </h1>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-neutral-900 text-white px-6">
+      <div className="bg-neutral-800 p-8 rounded-lg shadow-lg text-center max-w-md w-full">
+        <h1 className="text-2xl font-bold mb-4 text-[#fca311]">Payment Page</h1>
+        <p>Car: {pendingBooking.carName}</p>
+        <p>Total Price: ₹{pendingBooking.price}</p>
 
-        {/* 🚗 Booking Details */}
-        <div className="space-y-2 text-gray-300">
-          <p>
-            <strong className="text-white">Car:</strong> {booking.carName}
-          </p>
-          <p>
-            <strong className="text-white">Price:</strong> ₹{booking.price}
-          </p>
-          <p>
-            <strong className="text-white">Booking ID:</strong> {booking.id}
-          </p>
-          <p>
-            <strong className="text-white">Booked On:</strong>{" "}
-            {new Date(booking.createdAt).toLocaleString()}
-          </p>
-        </div>
-
-        {/* 💳 Pay Button */}
         <button
-          onClick={handlePayment}
-          className="bg-[#fca311] text-black font-semibold w-full py-2 mt-6 rounded-md hover:bg-[#e68a00] transition cursor-pointer"
+          onClick={handlePaymentSuccess}
+          className="mt-6 bg-[#fca311] text-black px-6 py-2 rounded-lg font-semibold hover:bg-[#e29500] transition"
         >
-          Pay Now
+          Complete Payment
         </button>
       </div>
     </div>

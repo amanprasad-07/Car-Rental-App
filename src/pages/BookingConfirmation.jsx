@@ -1,13 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addBooking, clearSelectedCar } from '../features/bookingSlice';
+import { setPendingBooking } from '../features/bookingSlice';
 
 export default function BookingConfirmation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Grab all booking data from Redux
   const {
     selectedCar,
     pickupBranch,
@@ -20,7 +19,8 @@ export default function BookingConfirmation() {
   const handleConfirmBooking = () => {
     if (!selectedCar) return;
 
-    const newBooking = {
+    // Prepare booking data to pass to payment page
+    const pendingBooking = {
       id: Date.now(),
       carId: selectedCar.id,
       carName: `${selectedCar.company} ${selectedCar.name}`,
@@ -33,12 +33,13 @@ export default function BookingConfirmation() {
       createdAt: new Date().toISOString(),
     };
 
-    dispatch(addBooking(newBooking));
-    dispatch(clearSelectedCar());
-    navigate('/my-bookings');
+    // Temporarily store it in Redux or localStorage
+    dispatch(setPendingBooking(pendingBooking));
+
+    // Go to payment page
+    navigate('/payment');
   };
 
-  // If user directly visits this page without selecting a car
   if (!selectedCar) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-neutral-900 text-white">
@@ -60,7 +61,7 @@ export default function BookingConfirmation() {
           <p>Model: <b>{selectedCar.company} {selectedCar.name}</b></p>
           <p>Fuel: {selectedCar.fuel}</p>
           <p>Seats: {selectedCar.seats}</p>
-          <p>Price: ₹{selectedCar.price}</p>
+          <p>Price: {selectedCar.price}</p>
         </div>
 
         {/* Booking Details */}
@@ -78,14 +79,14 @@ export default function BookingConfirmation() {
             onClick={handleConfirmBooking}
             className="bg-[#fca311] text-black px-5 py-2 rounded font-semibold hover:bg-[#e29500] transition-colors"
           >
-            Confirm Booking
+            Proceed to Payment
           </button>
 
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/browse')}
             className="bg-white text-black px-5 py-2 rounded font-semibold hover:bg-gray-300 transition-colors"
           >
-            Back to Home
+            Back to Browse
           </button>
         </div>
       </div>

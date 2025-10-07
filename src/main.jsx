@@ -31,13 +31,18 @@ const router = createBrowserRouter([
       { path: "/signup", element: <SignupPage /> },
 
       // Protected routes
-      { path: "/home", element: <PrivateRoute><Home /></PrivateRoute> },
-      { path: "/browse", element: <PrivateRoute><Browse /></PrivateRoute> },
-      { path: "/booking-form", element: <PrivateRoute><BookingForm /></PrivateRoute> },
-      { path: "/booking-confirmation", element: <PrivateRoute><BookingConfirmation /></PrivateRoute> },
-      { path: "/my-bookings", element: <PrivateRoute><MyBookings /></PrivateRoute> },
-      { path: "/payment/:bookingId", element: <PrivateRoute><PaymentPage /></PrivateRoute> },
-
+      {
+        element: <PrivateRoute />,
+        children: [
+          { path: "/home", element: <Home /> },
+          { path: "/browse", element: <Browse /> },
+          { path: "/booking-form", element: <BookingForm /> },
+          { path: "/booking-confirmation", element: <BookingConfirmation /> },
+          { path: "/my-bookings", element: <MyBookings /> },
+          { path: "/payment", element: <PaymentPage /> },
+        ],
+      },
+      
       // Default redirect to login if user hits "/"
       { path: "/", element: <Navigate to="/login" replace /> },
     ],

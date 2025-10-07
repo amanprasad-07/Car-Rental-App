@@ -49,6 +49,17 @@ const bookingSlice = createSlice({
       state.dropoffDate = dropoffDate;
       state.sameLocation = sameLocation;
     },
+
+    // 💳 Temporary booking before payment
+    setPendingBooking: (state, action) => {
+      state.pendingBooking = action.payload;
+      localStorage.setItem("pendingBooking", JSON.stringify(action.payload));
+    },
+
+    clearPendingBooking: (state) => {
+      state.pendingBooking = null;
+      localStorage.removeItem("pendingBooking");
+    },
   },
 });
 
@@ -57,7 +68,9 @@ export const {
   addBooking,
   clearSelectedCar,
   removeBooking,
-  setBookingDetails
+  setBookingDetails,
+  setPendingBooking,
+  clearPendingBooking,
 } = bookingSlice.actions;
 
 export default bookingSlice.reducer;
