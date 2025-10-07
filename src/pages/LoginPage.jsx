@@ -27,7 +27,7 @@ function LoginPage() {
 
   return (
     <div
-      className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
+      className="relative min-h-screen flex items-center justify-center bg-cover bg-center px-10"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       {/* Overlay to darken for better text visibility */}

@@ -55,7 +55,7 @@ function SignupPage() {
 
   return (
     <div
-      className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
+      className="relative min-h-screen flex items-center justify-center bg-cover bg-center pt-30 pb-20"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       {/* Overlay to darken for better text visibility */}
@@ -67,7 +67,7 @@ function SignupPage() {
           Create Your LuxeRides Profile
         </h1>
 
-        <form onSubmit={handleSignup} className="grid grid-cols gap-4">
+        <form onSubmit={handleSignup} className=" md:grid grid-cols gap-4">
           {/* Full Name */}
           <div>
             <label htmlFor="name" className="block mb-1 text-sm font-medium">
@@ -80,7 +80,7 @@ function SignupPage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311]"
+              className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311] mb-5 "
             />
           </div>
 
@@ -98,7 +98,7 @@ function SignupPage() {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               required
-              className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311]"
+              className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311] mb-5"
             />
           </div>
 
@@ -113,7 +113,7 @@ function SignupPage() {
               value={dob}
               onChange={(e) => setDob(e.target.value)}
               required
-              className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311]"
+              className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311] mb-5"
             />
           </div>
 
@@ -129,7 +129,7 @@ function SignupPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311]"
+              className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311] mb-5"
             />
           </div>
 
@@ -145,7 +145,7 @@ function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311]"
+              className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311] mb-5"
             />
           </div>
 
@@ -164,7 +164,7 @@ function SignupPage() {
               className={`border p-3 rounded-lg w-full focus:outline-none ${
                 confirmPassword && password !== confirmPassword
                   ? "border-red-500 focus:ring-red-400"
-                  : "border-gray-500 focus:ring-2 focus:ring-[#fca311]"
+                  : "border-gray-500 focus:ring-2 focus:ring-[#fca311] mb-5"
               } bg-transparent`}
             />
             {confirmPassword && password !== confirmPassword && (
@@ -178,7 +178,7 @@ function SignupPage() {
           {/* Submit */}
           <button
             type="submit"
-            className="bg-[#fca311] text-black py-2 rounded-lg hover:bg-[#d48403] transition font-semibold mt-3 col-span-2"
+            className="bg-[#fca311] text-black py-2 rounded-lg hover:bg-[#d48403] transition font-semibold mt-3 w-full md:col-span-2"
           >
             Sign Up
           </button>
