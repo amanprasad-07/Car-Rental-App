@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Static background image
@@ -9,6 +9,14 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("luxerides_loggedInUser");
+    if (loggedInUser) {
+      // User already logged in → redirect to profile (or home)
+      navigate("/home"); // or navigate("/")
+    }
+  }, [navigate]);
 
   const handleLogin = (e) => {
     e.preventDefault();
