@@ -17,6 +17,7 @@ import PaymentPage from "./pages/PaymentPage.jsx";
 import BookingForm from "./pages/BookingForm.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
+import Contact from "./pages/Contact.jsx";
 
 // PrivateRoute
 import PrivateRoute from "./services/PrivateRoute.jsx";
@@ -40,9 +41,10 @@ const router = createBrowserRouter([
           { path: "/booking-confirmation", element: <BookingConfirmation /> },
           { path: "/myprofile", element: <MyProfile /> },
           { path: "/payment", element: <PaymentPage /> },
+          { path: "/contact", element: <Contact /> },
         ],
       },
-      
+
       // Default redirect to login if user hits "/"
       { path: "/", element: <Navigate to="/login" replace /> },
     ],

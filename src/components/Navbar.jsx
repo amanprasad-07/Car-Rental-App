@@ -18,7 +18,7 @@ function Navbar() {
         };
 
         window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll); 
+        return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
 
     return (
@@ -32,7 +32,7 @@ function Navbar() {
             {/* Branding */}
             <div className="flex items-center">
                 <h1 className="text-2xl font-bold text-gray-50 tracking-wide hover:text-gray-400 transition-colors duration-300">
-                     <Link to="/home">LuxeRides</Link>
+                    <Link to="/home">LuxeRides</Link>
                 </h1>
             </div>
 
@@ -41,6 +41,7 @@ function Navbar() {
                 <li><Link to="/home" className="text-white hover:text-gray-300">Home</Link></li>
                 <li><Link to="/browse" className="text-white hover:text-gray-300">Browse</Link></li>
                 <li><Link to="/myprofile" className="text-white hover:text-gray-300">My Profile</Link></li>
+                <li><Link to="/contact" className="text-white hover:text-gray-300">Contact Us</Link></li>
             </ul>
 
             {/* Mobile Hamburger Menu */}
@@ -75,6 +76,11 @@ function Navbar() {
                                 <li>
                                     <Link to="/myprofile" className="block w-full text-center py-2 rounded hover:bg-neutral-600" onClick={() => setIsOpen(false)}>
                                         My Profile
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/contact" className="block w-full text-center py-2 rounded hover:bg-neutral-600" onClick={() => setIsOpen(false)}>
+                                        Contact Us
                                     </Link>
                                 </li>
                             </ul>
