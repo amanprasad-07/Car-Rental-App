@@ -1,3 +1,10 @@
+/**
+ * Branch Data
+ * ------------
+ * Provides the list of branch locations across Kerala with
+ * corresponding city names and geographical coordinates.
+ */
+
 export const branches = [
   { name: "Thiruvananthapuram Branch", city: "Thiruvananthapuram", lat: 8.5241, lng: 76.9366 },
   { name: "Kollam Branch", city: "Kollam", lat: 8.8932, lng: 76.6141 },

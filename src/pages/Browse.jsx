@@ -17,61 +17,35 @@ function Browse() {
   const [typeFilter, setTypeFilter] = useState('');
   const [sortBy, setSortBy] = useState('');
 
-  // -------------------- Extract unique filter options --------------------
+  // -------------------- Unique filter options --------------------
   const uniqueBrands = [...new Set(cars.map(car => car.company))];
   const allSeats = [...new Set(cars.map(car => car.seats))];
   const fuelTypes = [...new Set(cars.map(car => car.fuel))];
   const bodyTypes = [...new Set(cars.map(car => car.type))];
 
   // -------------------- Search input handler --------------------
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  const handleSearchChange = (e) => setSearchTerm(e.target.value);
 
-  // -------------------- Filter cars based on search and filters --------------------
-  const filteredCars = cars.filter((car) => {
-    const matchesSearch = (car.name + ' ' + car.company)
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-
-    const matchesBrand = brandFilter
-      ? car.company.trim().toLowerCase() === brandFilter.trim().toLowerCase()
-      : true;
-
-    const matchesSeat = seatFilter ? car.seats === Number(seatFilter) : true;
-
-    const matchesFuel = fuelFilter
-      ? car.fuel.trim().toLowerCase() === fuelFilter.trim().toLowerCase()
-      : true;
-
-    const matchesType = typeFilter
-      ? car.type.trim().toLowerCase() === typeFilter.trim().toLowerCase()
-      : true;
-
-    return matchesSearch && matchesBrand && matchesSeat && matchesFuel && matchesType;
+  // -------------------- Filter and sort cars --------------------
+  const filteredCars = cars.filter(car => {
+    const searchMatch = (car.name + ' ' + car.company).toLowerCase().includes(searchTerm.toLowerCase());
+    const brandMatch = brandFilter ? car.company.toLowerCase() === brandFilter.toLowerCase() : true;
+    const seatMatch = seatFilter ? car.seats === Number(seatFilter) : true;
+    const fuelMatch = fuelFilter ? car.fuel.toLowerCase() === fuelFilter.toLowerCase() : true;
+    const typeMatch = typeFilter ? car.type.toLowerCase() === typeFilter.toLowerCase() : true;
+    return searchMatch && brandMatch && seatMatch && fuelMatch && typeMatch;
   });
 
-  // -------------------- Sort cars by price --------------------
-  const sortCars = (carsToSort) => {
+  const displayedCars = [...filteredCars].sort((a, b) => {
     if (sortBy === 'lowToHigh') {
-      return [...carsToSort].sort(
-        (a, b) =>
-          Number(a.price.replace(/[^0-9]/g, '')) -
-          Number(b.price.replace(/[^0-9]/g, ''))
-      );
+      return Number(a.price.replace(/[^0-9]/g, '')) - Number(b.price.replace(/[^0-9]/g, ''));
     } else if (sortBy === 'highToLow') {
-      return [...carsToSort].sort(
-        (a, b) =>
-          Number(b.price.replace(/[^0-9]/g, '')) -
-          Number(a.price.replace(/[^0-9]/g, ''))
-      );
+      return Number(b.price.replace(/[^0-9]/g, '')) - Number(a.price.replace(/[^0-9]/g, ''));
     }
-    return carsToSort;
-  };
+    return 0;
+  });
 
-  const displayedCars = sortCars(filteredCars);
-
-  // -------------------- Handle "Book Now" button --------------------
+  // -------------------- Handle "Book Now" click --------------------
   const handleBookNow = (car) => {
     dispatch(setSelectedCar(car));
     navigate('/booking-confirmation');
@@ -84,11 +58,9 @@ function Browse() {
         Find Your Dream Car
       </h1>
 
-      {/* -------------------- Search Bar -------------------- */}
+      {/* Search Bar */}
       <form className="flex items-center bg-white rounded-lg h-11 w-full sm:w-[400px] text-lg pl-3 mx-auto md:mx-0 shadow-md">
-        <label htmlFor="search" className="hidden">
-          Search
-        </label>
+        <label htmlFor="search" className="hidden">Search</label>
         <input
           type="search"
           id="search"
@@ -99,77 +71,49 @@ function Browse() {
         />
       </form>
 
-      {/* -------------------- Filter Section -------------------- */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5  gap-4 my-8">
-        {/* Brand Filter */}
-        <select
-          value={brandFilter}
-          onChange={(e) => setBrandFilter(e.target.value)}
-          className="p-2 border rounded-md bg-gray-100"
-        >
-          <option value="">All Brands</option>
-          {uniqueBrands.map((brand) => (
-            <option key={brand} value={brand}>
-              {brand}
-            </option>
-          ))}
-        </select>
-
-        {/* Seat Filter */}
-        <select
-          value={seatFilter}
-          onChange={(e) => setSeatFilter(e.target.value)}
-          className="p-2 border rounded-md bg-gray-100"
-        >
-          <option value="">All Seats</option>
-          {allSeats.map((seat) => (
-            <option key={seat} value={seat}>
-              {seat} Seats
-            </option>
-          ))}
-        </select>
-
-        {/* Fuel Filter */}
-        <select
-          value={fuelFilter}
-          onChange={(e) => setFuelFilter(e.target.value)}
-          className="p-2 border rounded-md bg-gray-100"
-        >
-          <option value="">All Fuel Types</option>
-          {fuelTypes.map((fuel) => (
-            <option key={fuel} value={fuel}>
-              {fuel}
-            </option>
-          ))}
-        </select>
-
-        {/* Body Type Filter */}
-        <select
-          value={typeFilter}
-          onChange={(e) => setTypeFilter(e.target.value)}
-          className="p-2 border rounded-md bg-gray-100"
-        >
-          <option value="">All Body Types</option>
-          {bodyTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-
-        {/* Sort By Price */}
-        <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          className="p-2 border rounded-md bg-gray-100"
-        >
-          <option value="">Sort by Price</option>
-          <option value="lowToHigh">Low to High</option>
-          <option value="highToLow">High to Low</option>
-        </select>
+      {/* Filter Section */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 my-8">
+        {[{
+          label: 'All Brands',
+          value: brandFilter,
+          setValue: setBrandFilter,
+          options: uniqueBrands
+        }, {
+          label: 'All Seats',
+          value: seatFilter,
+          setValue: setSeatFilter,
+          options: allSeats.map(seat => `${seat} Seats`)
+        }, {
+          label: 'All Fuel Types',
+          value: fuelFilter,
+          setValue: setFuelFilter,
+          options: fuelTypes
+        }, {
+          label: 'All Body Types',
+          value: typeFilter,
+          setValue: setTypeFilter,
+          options: bodyTypes
+        }, {
+          label: 'Sort by Price',
+          value: sortBy,
+          setValue: setSortBy,
+          options: ['Low to High', 'High to Low']
+        }].map((filter, index) => (
+          <select
+            key={index}
+            value={filter.value}
+            onChange={(e) => filter.setValue(e.target.value === 'Low to High' || e.target.value === 'High to Low' ? e.target.value === 'Low to High' ? 'lowToHigh' : 'highToLow' : e.target.value)}
+            className="p-2 border rounded-md bg-gray-100"
+          >
+            <option value="">{filter.label}</option>
+            {filter.options.map(option => (
+              <option key={option} value={option.includes('Seats') ? option.split(' ')[0] : option}>{option}</option>
+            ))}
+          </select>
+        ))}
       </div>
 
-      {/* -------------------- Car Cards Grid -------------------- */}
+      {/* Car Cards */}
       {displayedCars.length > 0 ? (
         <ProductList cars={displayedCars} onBookNow={handleBookNow} />
       ) : (

@@ -1,25 +1,32 @@
-import React, { useState,useEffect } from "react";
+/**
+ * LoginPage Component
+ * -------------------
+ * Handles user authentication with email and password, and redirects logged-in users.
+ */
+
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Static background image
 const bgImage = "/log-bg.jpg";
 
 function LoginPage() {
   const navigate = useNavigate();
+
+  // Form state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  // Redirect logged-in users to home
   useEffect(() => {
     const loggedInUser = localStorage.getItem("luxerides_loggedInUser");
-    if (loggedInUser) {
-      // User already logged in → redirect to profile (or home)
-      navigate("/home"); // or navigate("/")
-    }
+    if (loggedInUser) navigate("/home");
   }, [navigate]);
 
+  // Handle login submission
   const handleLogin = (e) => {
     e.preventDefault();
+
     const users = JSON.parse(localStorage.getItem("luxerides_users")) || [];
     const foundUser = users.find(
       (user) => user.email === email && user.password === password
@@ -38,10 +45,10 @@ function LoginPage() {
       className="relative min-h-screen flex items-center justify-center bg-cover bg-center px-10"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      {/* Overlay to darken for better text visibility */}
+      {/* Dark overlay for text visibility */}
       <div className="absolute inset-0 bg-black/60"></div>
 
-      {/* Login Form */}
+      {/* Login form container */}
       <div className="relative z-10 bg-neutral-800/20 p-10 rounded-lg w-full max-w-md text-white shadow-xl backdrop-blur-sm">
         <h1 className="text-2xl font-semibold mb-5 text-center text-[#fca311]">
           Welcome to LuxeRides

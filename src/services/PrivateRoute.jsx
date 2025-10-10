@@ -2,16 +2,20 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 /**
- * PrivateRoute
- * ------------
- * Protects routes from unauthenticated access.
- * If a user is not logged in, they are redirected to the login page.
+ * PrivateRoute Component
+ * ----------------------
+ * Acts as a route guard for authenticated pages.
+ * Renders child routes (via <Outlet />) if a valid user is found in localStorage.
+ * Otherwise, redirects the user to the login page.
  */
 const PrivateRoute = () => {
-  // Get logged-in user from localStorage
-  const loggedInUser = JSON.parse(localStorage.getItem("luxerides_loggedInUser"));
-  const isAuthenticated = !!loggedInUser; // Boolean check
+  // Retrieve the stored user information
+  const storedUser = localStorage.getItem("luxerides_loggedInUser");
 
+  // Convert stored JSON to object and check authentication status
+  const isAuthenticated = !!JSON.parse(storedUser);
+
+  // Allow access if authenticated, otherwise redirect to login
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 };
 

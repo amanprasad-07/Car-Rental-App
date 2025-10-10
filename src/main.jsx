@@ -1,8 +1,9 @@
+// Entry point for the React application
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
 import "./index.css";
 import App from "./App.jsx";
@@ -19,38 +20,47 @@ import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import Contact from "./pages/Contact.jsx";
 
-// PrivateRoute
+// Services
 import PrivateRoute from "./services/PrivateRoute.jsx";
 
+/**
+ * Defines all routes for the application.
+ * Public routes are accessible to all users.
+ * Protected routes require authentication.
+ */
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
       // Public routes
-      { path: "/login", element: <LoginPage /> },
-      { path: "/signup", element: <SignupPage /> },
+      { path: "login", element: <LoginPage /> },
+      { path: "signup", element: <SignupPage /> },
 
       // Protected routes
       {
         element: <PrivateRoute />,
         children: [
-          { path: "/home", element: <Home /> },
-          { path: "/browse", element: <Browse /> },
-          { path: "/booking-form", element: <BookingForm /> },
-          { path: "/booking-confirmation", element: <BookingConfirmation /> },
-          { path: "/myprofile", element: <MyProfile /> },
-          { path: "/payment", element: <PaymentPage /> },
-          { path: "/contact", element: <Contact /> },
+          { path: "home", element: <Home /> },
+          { path: "browse", element: <Browse /> },
+          { path: "booking-form", element: <BookingForm /> },
+          { path: "booking-confirmation", element: <BookingConfirmation /> },
+          { path: "myprofile", element: <MyProfile /> },
+          { path: "payment", element: <PaymentPage /> },
+          { path: "contact", element: <Contact /> },
         ],
       },
 
-      // Default redirect to login if user hits "/"
-      { path: "/", element: <Navigate to="/login" replace /> },
+      // Default redirect to login page
+      { index: true, element: <Navigate to="/login" replace /> },
     ],
   },
 ]);
 
+/**
+ * Renders the React application to the DOM.
+ * Wraps the app with Redux and Router providers.
+ */
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>

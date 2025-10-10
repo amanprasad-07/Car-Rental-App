@@ -3,21 +3,16 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 /**
- * 🔝 ScrollToTop Component
- * Automatically scrolls the page to the top whenever the route changes.
- * 
- * This ensures users always start at the top of a new page 
- * instead of staying at their previous scroll position.
+ * ScrollToTop Component
+ * Automatically scrolls the window to the top whenever the route changes.
+ * Ensures users start at the top of each new page for consistent navigation.
  */
 export default function ScrollToTop() {
-  const { pathname } = useLocation(); // Detects route changes
+  const { pathname } = useLocation(); // Detect route change
 
   useEffect(() => {
-    // Scrolls to top when path changes
-    window.scrollTo({ top: 0, behavior: "instant" }); 
-    // 💡 Change "instant" → "smooth" for a smooth scrolling experience
+    window.scrollTo({ top: 0, behavior: "instant" }); // Scroll to top immediately
   }, [pathname]);
 
-  // No UI rendering required
-  return null;
+  return null; // No visual output
 }

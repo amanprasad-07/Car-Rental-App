@@ -7,22 +7,20 @@ export default function PaymentPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Get the pending booking (stored temporarily before payment)
+  // Get the pending booking from Redux
   const pendingBooking = useSelector((state) => state.booking.pendingBooking);
 
-  // 💰 Handle successful payment
+  // Handle successful payment and move pending booking to confirmed bookings
   const handlePaymentSuccess = () => {
     if (!pendingBooking) return;
 
-    // Move from pendingBooking → confirmed bookings
     dispatch(addBooking(pendingBooking));
     dispatch(clearPendingBooking());
-
-    alert("✅ Payment successful! Booking confirmed.");
+    alert("Payment successful! Booking confirmed.");
     navigate("/myprofile");
   };
 
-  // 🧾 No pending booking? Show fallback
+  // Render fallback if no pending booking exists
   if (!pendingBooking) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-neutral-900 text-white">
@@ -39,14 +37,13 @@ export default function PaymentPage() {
     );
   }
 
-  // 🎨 UI for valid payment process
+  // Render payment details and complete payment button
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-neutral-900 text-white px-6">
       <div className="bg-neutral-800 p-8 rounded-lg shadow-lg text-center max-w-md w-full">
         <h1 className="text-2xl font-bold mb-4 text-[#fca311]">Payment Page</h1>
         <p>Car: {pendingBooking.carName}</p>
         <p>Total Price: {pendingBooking.price}</p>
-
         <button
           onClick={handlePaymentSuccess}
           className="mt-6 bg-[#fca311] text-black px-6 py-2 rounded-lg font-semibold hover:bg-[#e29500] transition"

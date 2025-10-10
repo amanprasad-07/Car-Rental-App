@@ -1,4 +1,11 @@
-import React from 'react';
+/**
+ * Card Component
+ * ----------------
+ * Displays individual car information and provides a "Book Now" button.
+ * Selecting a car saves it in Redux and navigates the user to the booking form.
+ */
+
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSelectedCar } from "../features/bookingSlice";
@@ -7,17 +14,14 @@ function Card({ car }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Handler for "Book Now" button
+  /** Handles booking a car: saves selection and navigates to booking form */
   const handleBookNow = () => {
-    // Save selected car in Redux
     dispatch(setSelectedCar(car));
-
-    // Navigate to booking confirmation page
     navigate("/booking-form");
   };
 
   return (
-    <div className="flex flex-col items-center bg-[#e5e5e5] w-72 rounded-lg overflow-hidden shadow-lg">
+    <div className="flex flex-col items-center w-72 bg-[#e5e5e5] rounded-lg overflow-hidden shadow-lg">
       {/* Car Image */}
       <div className="w-full h-48">
         <img
@@ -29,23 +33,19 @@ function Card({ car }) {
 
       {/* Car Details */}
       <div className="flex flex-col items-center p-4 text-center">
-        {/* Car Name */}
-        <h2 className="font-bold text-lg text-[#14213d]">
+        <h2 className="text-lg font-bold text-[#14213d]">
           {car.company} {car.name}
         </h2>
 
-        {/* Price */}
-        <p className="text-[#8e0e70] font-semibold mt-1">Price: {car.price}</p>
+        <p className="mt-1 font-semibold text-[#8e0e70]">Price: {car.price}</p>
 
-        {/* Car Info: Type | Fuel | Seats */}
-        <p className="flex gap-2 justify-center font-medium text-gray-700 mt-1">
+        <p className="mt-1 flex justify-center gap-2 font-medium text-gray-700">
           <span>{car.type}</span>|<span>{car.fuel}</span>|<span>{car.seats} seats</span>
         </p>
 
-        {/* Book Now Button */}
         <button
           onClick={handleBookNow}
-          className="bg-[#fca311] px-6 py-2 font-medium rounded-lg text-black hover:bg-[#d48403] transition mt-4"
+          className="mt-4 px-6 py-2 font-medium text-black bg-[#fca311] rounded-lg hover:bg-[#d48403] transition"
         >
           Book Now
         </button>

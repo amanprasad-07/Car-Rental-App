@@ -1,37 +1,48 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Static background image
 const bgImage = "/log-bg.jpg";
 
 function SignupPage() {
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [dob, setDob] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // Form state
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    dob: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
   const [error, setError] = useState("");
 
+  // Handle input changes
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  // Handle signup submission
   const handleSignup = (e) => {
     e.preventDefault();
     setError("");
 
+    const { name, phone, dob, email, password, confirmPassword } = formData;
+
     if (!name || !phone || !dob || !email || !password || !confirmPassword) {
-      setError("All fields are required!");
+      setError("All fields are required.");
       return;
     }
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match!");
+      setError("Passwords do not match.");
       return;
     }
 
     const users = JSON.parse(localStorage.getItem("luxerides_users")) || [];
-    const existingUser = users.find((user) => user.email === email);
-    if (existingUser) {
+    if (users.find((user) => user.email === email)) {
       setError("User already exists. Please log in.");
       return;
     }
@@ -53,21 +64,21 @@ function SignupPage() {
     navigate("/login");
   };
 
+  const { name, phone, dob, email, password, confirmPassword } = formData;
+
   return (
     <div
       className="relative min-h-screen flex items-center justify-center bg-cover bg-center pt-30 pb-20"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      {/* Overlay to darken for better text visibility */}
       <div className="absolute inset-0 bg-black/60"></div>
 
-      {/* Signup Form */}
       <div className="relative z-10 bg-neutral-800/20 p-10 rounded-lg w-full max-w-lg text-white shadow-xl backdrop-blur-sm mx-5">
         <h1 className="text-3xl font-bold mb-6 text-center text-[#fca311]">
           Create Your LuxeRides Profile
         </h1>
 
-        <form onSubmit={handleSignup} className=" md:grid grid-cols gap-4">
+        <form onSubmit={handleSignup} className="md:grid grid-cols gap-4">
           {/* Full Name */}
           <div>
             <label htmlFor="name" className="block mb-1 text-sm font-medium">
@@ -78,9 +89,9 @@ function SignupPage() {
               id="name"
               placeholder="Enter your full name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleChange}
               required
-              className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311] mb-5 "
+              className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311] mb-5"
             />
           </div>
 
@@ -96,7 +107,7 @@ function SignupPage() {
               pattern="[0-9]{10}"
               maxLength="10"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={handleChange}
               required
               className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311] mb-5"
             />
@@ -111,7 +122,7 @@ function SignupPage() {
               type="date"
               id="dob"
               value={dob}
-              onChange={(e) => setDob(e.target.value)}
+              onChange={handleChange}
               required
               className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311] mb-5"
             />
@@ -127,7 +138,7 @@ function SignupPage() {
               id="email"
               placeholder="Enter your email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChange}
               required
               className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311] mb-5"
             />
@@ -143,7 +154,7 @@ function SignupPage() {
               id="password"
               placeholder="Create a password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleChange}
               required
               className="border border-gray-500 bg-transparent p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[#fca311] mb-5"
             />
@@ -151,7 +162,10 @@ function SignupPage() {
 
           {/* Confirm Password */}
           <div>
-            <label htmlFor="confirmPassword" className="block mb-1 text-sm font-medium">
+            <label
+              htmlFor="confirmPassword"
+              className="block mb-1 text-sm font-medium"
+            >
               Confirm Password
             </label>
             <input
@@ -159,12 +173,12 @@ function SignupPage() {
               id="confirmPassword"
               placeholder="Re-enter your password"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={handleChange}
               required
-              className={`border p-3 rounded-lg w-full focus:outline-none ${
+              className={`border p-3 rounded-lg w-full focus:outline-none mb-5 ${
                 confirmPassword && password !== confirmPassword
                   ? "border-red-500 focus:ring-red-400"
-                  : "border-gray-500 focus:ring-2 focus:ring-[#fca311] mb-5"
+                  : "border-gray-500 focus:ring-2 focus:ring-[#fca311]"
               } bg-transparent`}
             />
             {confirmPassword && password !== confirmPassword && (
@@ -173,9 +187,11 @@ function SignupPage() {
           </div>
 
           {/* Error Message */}
-          {error && <p className="text-red-400 text-sm text-center col-span-2">{error}</p>}
+          {error && (
+            <p className="text-red-400 text-sm text-center col-span-2">{error}</p>
+          )}
 
-          {/* Submit */}
+          {/* Submit Button */}
           <button
             type="submit"
             className="bg-[#fca311] text-black py-2 rounded-lg hover:bg-[#d48403] transition font-semibold mt-3 w-full md:col-span-2"
@@ -184,7 +200,7 @@ function SignupPage() {
           </button>
         </form>
 
-        {/* Footer Link */}
+        {/* Login Link */}
         <p className="mt-4 text-center text-sm">
           Already have an account?{" "}
           <span

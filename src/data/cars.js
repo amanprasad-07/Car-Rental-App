@@ -1,4 +1,11 @@
-// cars.js
+/**
+ * cars.js
+ * ------------
+ * Provides a dataset of premium and luxury car listings for rental services.
+ * Each entry includes essential attributes such as company, model, type,
+ * fuel type, seating capacity, and daily rental price.
+ */
+
 const cars = [
   {
     id: 1,

@@ -1,1 +1,7 @@
+/* Tailwind CSS Configuration Import
+ * ---------------------------------
+ * Imports the base Tailwind CSS utilities and components
+ * for styling the entire application.
+ */
+
 @import "tailwindcss";

@@ -1,13 +1,13 @@
 /**
  * App Component
- * Serves as the main layout for the entire application.
- * 
- * Includes the global Navbar and Footer, and uses React Router's <Outlet> 
- * to render the active page component between them.
+ * Acts as the main layout wrapper for the application.
+ * Includes the Navbar and Footer across all routes and renders
+ * the current route's component in between using React Router's <Outlet>.
  */
 
 import React from "react";
 import { Outlet } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./services/ScrollTop";
@@ -15,16 +15,16 @@ import ScrollToTop from "./services/ScrollTop";
 function App() {
   return (
     <>
-      {/* Ensures the page scrolls to the top when the route changes */}
+      {/* Automatically scrolls to top when the route changes */}
       <ScrollToTop />
 
-      {/* Global navigation bar displayed across all pages */}
+      {/* Global navigation bar */}
       <Navbar />
 
-      {/* Renders the component corresponding to the current route */}
+      {/* Active page content rendered here */}
       <Outlet />
 
-      {/* Global footer displayed across all pages */}
+      {/* Global footer */}
       <Footer />
     </>
   );
