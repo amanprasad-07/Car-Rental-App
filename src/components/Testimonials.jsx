@@ -95,7 +95,7 @@ export default function Testimonials() {
       >
         {testimonials.map((testimonial, index) => (
           <SwiperSlide key={index}>
-            <div className="bg-neutral-800 rounded-2xl p-8 pt-16 md:mx-5 text-center shadow-lg h-[250px]">
+            <div className="bg-neutral-800 rounded-2xl p-8 pt-16 md:mx-2 text-center shadow-lg h-[250px]">
               {/* Testimonial Text */}
               <p className="text-lg italic text-gray-200 mb-4">
                 “{testimonial.text}”

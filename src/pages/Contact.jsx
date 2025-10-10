@@ -7,7 +7,7 @@ const Contact = () => {
             <h2 className="text-4xl font-bold mb-3 text-amber-400">Get in Touch</h2>
             <p className="text-gray-300 mb-8">
                 Have questions, feedback, or need help with your booking?
-                Our team at <span className="text-amber-400 font-semibold">DriveEase Rentals</span> is always ready to assist.
+                Our team at <span className="text-amber-400 font-semibold">LuxeRides</span> is always ready to assist.
             </p>
             <div className="  flex flex-col w-full md:flex-row gap-10 items-start">
                 {/* Left: Intro + Form */}
@@ -58,7 +58,7 @@ const Contact = () => {
                             <Phone className="text-amber-400" /> +91 98765 43210
                         </p>
                         <p className="flex items-center gap-3">
-                            <Mail className="text-amber-400" /> support@driveease.com
+                            <Mail className="text-amber-400" /> support@LuxeRides.com
                         </p>
                         <p className="flex items-center gap-3">
                             <MapPin className="text-amber-400" /> MG Road, Kochi, Kerala, India
