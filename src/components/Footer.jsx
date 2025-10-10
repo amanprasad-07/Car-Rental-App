@@ -15,7 +15,7 @@ function Footer() {
     <footer className="bg-[#131314] text-gray-700">
       {/* Main footer content */}
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-        
+
         {/* Branding section */}
         <div>
           <h2 className="text-2xl font-bold text-gray-50 mb-4">LuxeRides</h2>
@@ -28,7 +28,8 @@ function Footer() {
           <ul className="flex flex-row gap-4 text-gray-300">
             <li><Link to="/home" className={linkStyle}>Home</Link></li>
             <li><Link to="/browse" className={linkStyle}>Browse</Link></li>
-            <li><Link to="/my-bookings" className={linkStyle}>My Bookings</Link></li>
+            <li><Link to="/myprofile" className={linkStyle}>My Profile</Link></li>
+            <li><Link to="/contact" className={linkStyle}>Contact Us</Link></li>
           </ul>
         </div>
 
